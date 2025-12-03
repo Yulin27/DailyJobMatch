@@ -227,8 +227,3 @@ Jobs are automatically saved to your Notion "Job Applications" database with the
 
 The Status field allows you to manually track your application progress for each job.
 
----
-
-## License
-
-See [LICENSE](LICENSE) file for details.
