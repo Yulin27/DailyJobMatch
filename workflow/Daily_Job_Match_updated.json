@@ -389,7 +389,7 @@
     },
     {
       "parameters": {
-        "content": "**Output & Notification**\n- Generates a clean, formatted HTML summary of your top job matches\n- Delivers the daily AI-filtered job report directly to your inbox.",
+        "content": "**Output & Notification**\n- Save the information in Notion database",
         "height": 320,
         "width": 288,
         "color": 4
