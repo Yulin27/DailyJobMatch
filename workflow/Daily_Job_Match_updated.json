@@ -14,7 +14,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -2816,
+        -2656,
         80
       ],
       "id": "a92db44e-5006-4d58-ab1c-b6a3e7e7f261",
@@ -28,7 +28,7 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        -1968,
+        -2016,
         80
       ],
       "id": "39cf2a68-23d0-4a6e-ae35-5ae6e6722473",
@@ -145,7 +145,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -2592,
+        -2480,
         80
       ],
       "id": "b8098137-a607-431d-929f-f9754e3f076a",
@@ -195,7 +195,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1744,
+        -1792,
         80
       ],
       "id": "b595e4a3-5118-4f06-8695-8f44144f5ac3",
@@ -220,12 +220,12 @@
       "parameters": {
         "content": "**Schedule Trigger:**\n- Starts the workflow automatically each morning 7:30 ",
         "height": 320,
-        "width": 224,
+        "width": 150,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -2896,
+        -2672,
         -96
       ],
       "typeVersion": 1,
@@ -236,11 +236,11 @@
       "parameters": {
         "content": "**Configuration**: \nDefines all key workflow parameters such as \n- API tokens, \n- URLs\n- Searching config",
         "height": 320,
-        "width": 400
+        "width": 208
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -2672,
+        -2528,
         -96
       ],
       "typeVersion": 1,
@@ -256,7 +256,7 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -2240,
+        -2288,
         -96
       ],
       "typeVersion": 1,
@@ -267,12 +267,12 @@
       "parameters": {
         "content": "**Job Data Collection and Preprocessing:**\n- Collects fresh job postings from LinkedIn\n- Standardises all job fields\n- Removes duplicates and filters out irrelevant roles with defined keywords\n- Combines each job description with your extracted CV text ",
         "height": 320,
-        "width": 864,
+        "width": 976,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1520,
+        -1632,
         -96
       ],
       "typeVersion": 1,
@@ -302,8 +302,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -496,
-        -192
+        -640,
+        -176
       ],
       "typeVersion": 1,
       "id": "2726d135-de17-48dc-a08c-2e4350fa2cf0",
@@ -328,12 +328,12 @@
       "parameters": {
         "content": "**Parse & Merge Results**\n- Convert the chat model’s text response into a clean JSON object\n- Attach job metadata back onto the parsed LLM output.",
         "height": 320,
-        "width": 544,
+        "width": 480,
         "color": 2
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        144,
+        48,
         -96
       ],
       "typeVersion": 1,
@@ -348,15 +348,15 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        144,
-        -112
+        96,
+        0
       ],
       "id": "651577d7-f5d3-4694-9002-56627f929c4b",
       "name": "Parse LLM JSON"
     },
     {
       "parameters": {
-        "content": "**Top 15 Selection:**\n- Order jobs from best to worst fit\n- Keeps only the top 15 best-fit jobs for report and email",
+        "content": "**Top Selection:**\n- Order jobs from best to worst fit\n- Keeps only the top best-fit jobs for report and email",
         "height": 320,
         "width": 448,
         "color": 5
@@ -397,7 +397,7 @@
       "parameters": {
         "content": "**Output & Notification**\n- Generates a clean, formatted HTML summary of your top job matches\n- Delivers the daily AI-filtered job report directly to your inbox.",
         "height": 320,
-        "width": 448,
+        "width": 288,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -520,8 +520,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1600,
-        240
+        -1616,
+        80
       ],
       "id": "56092fc5-c21e-4001-b484-b8d614f4b6a7",
       "name": "LinkedinSearchLink"
@@ -539,7 +539,7 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -2192,
+        -2240,
         80
       ],
       "id": "b2394260-cb9e-4571-afe1-46b9917b29a6",
@@ -769,13 +769,18 @@
           }
         ]
       ]
+    },
+    "Create a database page": {
+      "main": [
+        []
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "9dea856d-7533-4c70-8b30-6e21e82a8996",
+  "versionId": "5646e02d-7195-4761-8dbf-c2aec34c9ca3",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "51a08df3ff7f4ca2e2020dea82578ac5e5e62c8b8585552cc2b200dbebc8319b"
