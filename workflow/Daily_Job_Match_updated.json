@@ -14,10 +14,10 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        0,
-        576
+        -2816,
+        288
       ],
-      "id": "18d2245c-4d51-4ed6-bb85-9e37cc479ef6",
+      "id": "05ebd976-5403-46d9-bd35-26870e8d351d",
       "name": "Schedule Trigger"
     },
     {
@@ -28,10 +28,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        672,
-        576
+        -1968,
+        288
       ],
-      "id": "6aa59d98-a12f-4e35-b30e-5757b7c5d47d",
+      "id": "0093c327-a6dd-4dc3-bd23-cc625089c16f",
       "name": "Extract from File"
     },
     {
@@ -57,33 +57,17 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\n    \"count\": 100,\n    \"scrapeCompany\": true,\n    \"urls\": [\n        \"https://www.linkedin.com/jobs/search?keywords=Data&location=Copenhagen%20Municipality&geoId=106743989&f_JT=F%2CC%2CI&f_TPR=r86400&f_WT=1&position=1&pageNum=0\",\n        \"https://www.linkedin.com/jobs/search?keywords=Data%20Scientist&location=Copenhagen%20Municipality&geoId=106743989&f_JT=F%2CC%2CI&f_TPR=r86400&f_WT=1&position=1&pageNum=0\",\n        \"https://www.linkedin.com/jobs/search?keywords=Data%20Engineer&location=Copenhagen%20Municipality&geoId=106743989&f_JT=F%2CC%2CI&f_TPR=r86400&f_WT=1&position=1&pageNum=0\",\n        \"https://www.linkedin.com/jobs/search?keywords=Bioinformatics&location=Copenhagen%20Municipality&geoId=106743989&f_JT=F%2CC%2CI&f_TPR=r86400&f_WT=1&position=1&pageNum=0\"\n    ]\n}",
+        "jsonBody": "={{ $json }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1120,
-        576
+        -1472,
+        288
       ],
-      "id": "71a72e99-46b6-422e-80a5-e1a1a9c15556",
+      "id": "72227340-662f-4392-b7de-c26bb8c2ccd8",
       "name": "Linkedin"
-    },
-    {
-      "parameters": {
-        "subject": "Daily Job Dose",
-        "message": "={{ $json.html }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.1,
-      "position": [
-        3856,
-        576
-      ],
-      "id": "975f73c8-6d50-4dcf-a2dc-9990a751ff83",
-      "name": "Send a message",
-      "webhookId": "a7f1bd8e-c66a-4713-b9c7-01831e564fa5"
     },
     {
       "parameters": {
@@ -95,10 +79,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3,
       "position": [
-        2208,
-        400
+        -320,
+        112
       ],
-      "id": "2514de0d-5610-40f2-b1da-fbfd0db4fa28",
+      "id": "f0a34715-1ae8-4f81-a5ae-38ba083a048e",
       "name": "Score the job and extract",
       "retryOnFail": true
     },
@@ -109,13 +93,13 @@
             {
               "id": "0619efc8-36c0-40ae-a873-68be9b0bbf3b",
               "name": "apifyDatasetUrl",
-              "value": "",
+              "value": "YOUR_APIFY_API",
               "type": "string"
             },
             {
               "id": "54e1280f-5944-4d35-9c9a-e52694c4c5eb",
               "name": "gmailTo",
-              "value": "",
+              "value": "eliane.shiyulin@gmail.com",
               "type": "string"
             },
             {
@@ -129,6 +113,18 @@
               "name": "topTotal",
               "value": "15",
               "type": "string"
+            },
+            {
+              "id": "7c3a4b5d-6e7f-8g9h-0i1j-2k3l4m5n6o7p",
+              "name": "keywords",
+              "value": "[\"NLP Engineer\", \"AI Engineer\", \"Machine Learning Engineer\", \"CIFRE NLP\", \"PhD NLP\", \"Doctoral Researcher NLP\", \"Computer Science PhD\"]",
+              "type": "string"
+            },
+            {
+              "id": "8d4b5c6e-7f8g-9h0i-1j2k-3l4m5n6o7p8q",
+              "name": "location",
+              "value": "Paris",
+              "type": "string"
             }
           ]
         },
@@ -137,30 +133,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        224,
-        576
+        -2592,
+        288
       ],
-      "id": "9051c35d-5a66-4c0f-8ec4-db6c3f1636da",
+      "id": "1bad9926-1b66-4654-9323-f9f49bbaf520",
       "name": "Config"
-    },
-    {
-      "parameters": {
-        "operation": "download",
-        "fileId": {
-          "__rl": true,
-          "value": "",
-          "mode": "id"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        448,
-        576
-      ],
-      "id": "06e485fc-5d6f-4d57-8d23-62dcdea5ad05",
-      "name": "RetrieveCV"
     },
     {
       "parameters": {
@@ -170,10 +147,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1344,
-        576
+        -1248,
+        288
       ],
-      "id": "efd436d5-e6a1-4e16-9829-d48d3f136e5f",
+      "id": "f6bfe977-609b-4147-8024-c19675b95daa",
       "name": "NormalizeData"
     },
     {
@@ -183,10 +160,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1568,
-        576
+        -1024,
+        288
       ],
-      "id": "f439b8cd-2c4a-4365-ba2a-e684cdd1527b",
+      "id": "bafa4774-1909-41b0-b70a-a0aadbffa745",
       "name": "Filter and deduplicate"
     },
     {
@@ -206,10 +183,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        896,
-        576
+        -1744,
+        288
       ],
-      "id": "1f8078cb-bc08-4e07-a28e-c9e6c32eba38",
+      "id": "2cfef861-fe28-456c-83be-c3380979890e",
       "name": "MapResume"
     },
     {
@@ -220,10 +197,10 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        2016,
-        208
+        -576,
+        -80
       ],
-      "id": "a030475b-f139-417f-82dc-1165ee43a0d4",
+      "id": "f0c8badb-5b9e-403f-a1e9-85f9288f50ec",
       "name": "Loop Over Items",
       "onError": "continueRegularOutput"
     },
@@ -233,10 +210,10 @@
       "name": "Replace Me",
       "typeVersion": 1,
       "position": [
-        2384,
-        0
+        -208,
+        -288
       ],
-      "id": "0138f84e-169c-4366-b59d-edcc42c8269a"
+      "id": "8928871e-e6c4-4d1b-8bae-d6e764323432"
     },
     {
       "parameters": {
@@ -247,82 +224,41 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        2320,
-        608
+        -224,
+        336
       ],
-      "id": "e2cc8110-63d6-4cc3-a00e-aafe65c74644",
+      "id": "afb0dc26-328b-4ab8-8765-62fe6063de4b",
       "name": "Structured Output Parser"
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "value": "",
-          "mode": "id"
-        },
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.2,
-      "position": [
-        2320,
-        768
-      ],
-      "id": "83428f34-c0e7-40f6-b63b-c55ded331195",
-      "name": "OpenAI Chat Model",
-      "credentials": {
-        "openAiApi": {
-          "id": "FjNKVa4RkOKoeEEX",
-          "name": "OpenAi account 2"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "value": "",
-          "mode": "id"
-        },
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.2,
-      "position": [
-        2176,
-        592
-      ],
-      "id": "78a3b01c-de7d-4e41-9a0e-bba47ba5703c",
-      "name": "OpenAI Chat Model1"
     },
     {
       "parameters": {
         "content": "**Schedule Trigger:**\n- Starts the workflow automatically each morning 7:30 ",
         "height": 320,
-        "width": 256,
+        "width": 224,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -96,
-        432
+        -2896,
+        128
       ],
       "typeVersion": 1,
-      "id": "02ababb6-924a-40d1-bd64-af5aad17df4f",
+      "id": "a9113e24-3e8b-4a65-9cfb-6d8708f01abe",
       "name": "Sticky Note2"
     },
     {
       "parameters": {
-        "content": "**Configuration**: \nDefines all key workflow parameters such as \n- API tokens, \n- URLs\n- email settings \n",
-        "height": 320
+        "content": "**Configuration**: \nDefines all key workflow parameters such as \n- API tokens, \n- URLs\n- Searching config",
+        "height": 320,
+        "width": 400
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        160,
-        432
+        -2672,
+        128
       ],
       "typeVersion": 1,
-      "id": "1a6c13ad-0348-4521-89aa-75345925e3f6",
+      "id": "db5e5996-5560-4136-9eb6-0c6116f3255b",
       "name": "Sticky Note3"
     },
     {
@@ -334,11 +270,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        400,
-        432
+        -2240,
+        128
       ],
       "typeVersion": 1,
-      "id": "b60da7e8-9aec-438b-be73-aabdcfb28592",
+      "id": "50b906d8-5814-4e40-b0ce-cedac78dd419",
       "name": "Sticky Note4"
     },
     {
@@ -350,11 +286,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1040,
-        432
+        -1520,
+        128
       ],
       "typeVersion": 1,
-      "id": "cd00ad99-0c38-499a-9a3a-5cd7b3bbac65",
+      "id": "e713d164-b8b7-4baa-a29a-1c5714702235",
       "name": "Sticky Note5"
     },
     {
@@ -365,10 +301,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1792,
-        576
+        -800,
+        288
       ],
-      "id": "a55aa859-8ab0-4dea-a353-12b4e4a29c8c",
+      "id": "621b85df-50dc-41d6-8239-953cdda697f2",
       "name": "Prepare AI Input"
     },
     {
@@ -380,11 +316,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1904,
-        -32
+        -672,
+        -320
       ],
       "typeVersion": 1,
-      "id": "96dcce07-8be1-4903-8934-b0bef673c396",
+      "id": "73fde066-d459-4e3d-abaf-ca6775cd86dc",
       "name": "Sticky Note"
     },
     {
@@ -396,11 +332,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1904,
-        368
+        -496,
+        32
       ],
       "typeVersion": 1,
-      "id": "2268894a-fce4-4a3e-8256-88bb09d4714f",
+      "id": "e5dce599-3163-4ffc-a54e-0ae35acb41fb",
       "name": "Sticky Note1"
     },
     {
@@ -412,10 +348,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        2960,
-        576
+        368,
+        288
       ],
-      "id": "20be4750-a764-4540-9dfc-c8642a3cbb32",
+      "id": "2b88ed79-809e-4eed-8d1a-9de5c682ad9b",
       "name": "Merge Scores + Meta"
     },
     {
@@ -427,11 +363,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        2576,
-        416
+        144,
+        128
       ],
       "typeVersion": 1,
-      "id": "fc6ca51f-902a-47a8-a65a-3149da67665c",
+      "id": "4e9e97eb-7f68-477a-84eb-ca66d9151931",
       "name": "Sticky Note6"
     },
     {
@@ -442,10 +378,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2672,
-        496
+        144,
+        112
       ],
-      "id": "462c2cf6-086f-4197-97e2-6841a4732210",
+      "id": "16344bf6-845d-478c-a8b9-cd3a5203d080",
       "name": "Parse LLM JSON"
     },
     {
@@ -457,11 +393,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        3120,
-        416
+        528,
+        128
       ],
       "typeVersion": 1,
-      "id": "4ee6e5cf-e9f8-496b-838a-15e4ce72e5c5",
+      "id": "cc3381f0-3f51-4682-88c7-3606ea63a4fd",
       "name": "Sticky Note7"
     },
     {
@@ -481,10 +417,10 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        3184,
-        576
+        592,
+        288
       ],
-      "id": "ba7517f7-e30f-4010-aa09-fe6c794bf6b7",
+      "id": "c599c4d8-a991-4341-a864-86354612b637",
       "name": "Rank by Overall Score"
     },
     {
@@ -494,24 +430,11 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3408,
-        576
+        816,
+        288
       ],
-      "id": "426ec325-d00d-48a0-a527-901a955c3026",
+      "id": "bc3c128b-ef13-416b-88bb-a4bdce47a272",
       "name": "Top 15 Slice"
-    },
-    {
-      "parameters": {
-        "jsCode": "// === Beautiful, consistent HTML for Top jobs (dark theme, robust to nested fields) ===\nfunction esc(s){return String(s??'').replace(/[<&>]/g,m=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[m]));}\n\n// Accept {json:{...}} or plain {...}\nconst raws = $input.all();\nconst items = raws.map(it => (it && typeof it==='object' && 'json' in it) ? it.json : it);\n\n// Helpers\nconst titleCase = s => String(s||'')\n  .toLowerCase()\n  .replace(/\\b([a-z])/g, m => m.toUpperCase());\n\nfunction pick(i){\n  const out  = i.output   || {};\n  const meta = i.job_meta || {};\n  const keywords = Array.isArray(out.keywords) ? out.keywords : [];\n  const bullets  = Array.isArray(out.fit_bullets) ? out.fit_bullets.slice(0,3) : [];\n  const overall  = (out.score && out.score.overall!=null) ? out.score.overall : '';\n  return {\n    title: meta.title || '',\n    company: meta.company || '',\n    location: meta.location || '',\n    url: meta.url || i.url || i.apply_url || '#',\n    score: overall,\n    summary: out.summary || '',\n    bullets,\n    connector: out.connector || '',\n    chips: keywords.slice(0,6).map(titleCase)\n  };\n}\n\nfunction scoreColor(n){\n  if (n==='' || isNaN(n)) return '#9aa0a6';\n  n = Number(n);\n  if (n >= 85) return '#22c55e'; // green\n  if (n >= 70) return '#3b82f6'; // blue\n  if (n >= 55) return '#eab308'; // amber\n  return '#f97316';              // orange\n}\n\nconst style = `\n  body{margin:0;background:#0f1115;color:#e6e7eb;font-family:ui-sans-serif,system-ui,Arial}\n  .wrap{max-width:820px;margin:0 auto;padding:28px}\n  h2{margin:0 0 18px 0;font-size:22px;letter-spacing:.2px}\n  .card{border:1px solid #232635;background:#151821;border-radius:14px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 6px rgba(0,0,0,.25)}\n  .title{margin:0;font-size:18px;font-weight:800;color:#8ab4ff}\n  .meta{margin:6px 0 10px 0;color:#b6bcc8;font-size:12px}\n  .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}\n  .badge{display:inline-block;border:1px solid rgba(255,255,255,.08);padding:2px 10px;border-radius:999px;font-size:12px}\n  .score{font-weight:800}\n  .score-pill{display:inline-block;padding:3px 10px;border-radius:999px;font-weight:800;background:#1f2937;color:#fff;border:1px solid rgba(255,255,255,.08)}\n  .chips{margin:2px 0 8px 0}\n  .chip{display:inline-block;margin:6px 8px 0 0;padding:4px 10px;border-radius:999px;font-size:12px;\n        background:#1e2330;border:1px solid #2a3244;color:#cbd5e1}\n  .summary{margin:8px 0 8px 0;line-height:1.55;font-size:13px;color:#e0e3ea}\n  ul{margin:8px 0 0 18px;padding:0}\n  li{margin:6px 0;line-height:1.45;font-size:13px; color:#e0e3ea;}\n  .connector{margin:12px 0 0 0;color:#c7cbd6;font-size:13px}\n  .btn{display:inline-block;margin-top:12px;padding:10px 14px;border-radius:10px;background:#3b82f6;color:#fff !important;\n       text-decoration:none;font-weight:700;font-size:13px;border:1px solid #315fd1}\n  .divider{height:1px;background:#232635;margin:12px 0;border-radius:1px}\n  .footer{margin-top:20px;color:#9aa0a6;font-size:12px}\n`;\n\nfunction card(item){\n  const j = pick(item);\n  const sc = j.score === '' ? '—' : String(j.score);\n  const scColor = scoreColor(j.score);\n  const chips = j.chips.length ? `<div class=\"chips\">${j.chips.map(c=>`<span class=\"chip\">${esc(c)}</span>`).join('')}</div>` : '';\n  const bullets = j.bullets.length ? `<ul>${j.bullets.map(b=>`<li>${esc(b)}`).join('')}</ul>` : '';\n  const connector = j.connector ? `<div class=\"connector\">${esc(j.connector)}</div>` : '';\n  return `\n    <div class=\"card\">\n      <div class=\"row\" style=\"justify-content:space-between\">\n        <h3 class=\"title\">${esc(j.title)}</h3>\n        <span class=\"score-pill\" style=\"border-color:${scColor};color:${scColor}\">Score: ${sc}/100</span>\n      </div>\n      <div class=\"meta\">${esc(j.company)} — ${esc(j.location)}</div>\n      ${chips}\n      <div class=\"summary\">${esc(j.summary)}</div>\n      ${bullets}\n      ${connector}\n      <div class=\"divider\"></div>\n      <a class=\"btn\" href=\"${esc(j.url)}\" target=\"_blank\">View & Apply</a>\n    </div>\n  `;\n}\n\nconst html = `\n<!doctype html>\n<html>\n<head><meta charset=\"utf-8\"><style>${style}</style></head>\n<body>\n  <div class=\"wrap\">\n    <h2>🔥 Your Top ${items.length} Job Matches Today</h2>\n    ${items.map(card).join('\\n')}\n    <div class=\"footer\">Sent by your Job Agent at ${new Date().toLocaleString()}.</div>\n  </div>\n</body>\n</html>\n`;\n\n// Return correct shape for your node type\nconst first = $input.first();\nconst isFunctionNode = first && typeof first==='object' && 'json' in first;\nreturn isFunctionNode ? [{ json: { html } }] : { html };"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        3632,
-        576
-      ],
-      "id": "edadfc72-60cc-4295-8115-32b54e6c4cdd",
-      "name": "Build Email HTML"
     },
     {
       "parameters": {
@@ -522,12 +445,154 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        3568,
-        416
+        976,
+        128
       ],
       "typeVersion": 1,
-      "id": "015f3780-a771-452a-ac37-7c637b2f6807",
+      "id": "11e64c53-6b0a-4a7a-a3ac-279df951366c",
       "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        336
+      ],
+      "id": "709f5032-80ae-4f6b-9ba8-400bf0fa5a59",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "X4B2LLN4sicsS3OB",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        544
+      ],
+      "id": "224e3ba3-03ac-46c6-b04a-745bba6207c5",
+      "name": "Groq Chat Model1",
+      "credentials": {
+        "groqApi": {
+          "id": "X4B2LLN4sicsS3OB",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "2bda309b-df01-8002-a667-db6ce6a486e4",
+          "mode": "list",
+          "cachedResultName": "Job Applications",
+          "cachedResultUrl": "https://www.notion.so/2bda309bdf018002a667db6ce6a486e4"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Job Title|title",
+              "title": "={{ $json.job_meta.title }}"
+            },
+            {
+              "key": "Company|rich_text",
+              "textContent": "={{ $json.job_meta.company }}"
+            },
+            {
+              "key": "Location|rich_text",
+              "textContent": "={{ $json.job_meta.location }}"
+            },
+            {
+              "key": "Posting date|date",
+              "date": "={{ $json.job_meta.posted_at }}"
+            },
+            {
+              "key": "Application Link|url",
+              "urlValue": "={{ $json.job_meta.url }}"
+            },
+            {
+              "key": "Keywords|multi_select",
+              "multiSelectValue": "={{ $json.output.keywords }}"
+            },
+            {
+              "key": "Match score|number",
+              "numberValue": "={{ $json.output.score.overall }}"
+            }
+          ]
+        },
+        "blockUi": {
+          "blockValues": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        1024,
+        288
+      ],
+      "id": "93f5994a-b7a2-41c1-a073-e0d3b0735e7e",
+      "name": "Create a database page",
+      "credentials": {
+        "notionApi": {
+          "id": "7pF603rypFKAPEGo",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const config = $('Config').item.json;\nconst keywords = JSON.parse(config.keywords);\nconst location = encodeURIComponent(config.location);\nconst altLocation = encodeURIComponent(config.alternativeLocation);\nconst geoId = config.geoId;\nconst filters = config.jobFilters;\nconst altFilters = config.alternativeJobFilters;\n\n// Add time filter parameter (defaults to past 24 hours)\nconst timeFilter = config.timeFilter || 'r86400'; // r86400 = past 24 hours\n\nconst urls = keywords.map((kw, idx) => {\n  const encodedKw = encodeURIComponent(kw);\n  const loc = idx < 3 ? location : altLocation;\n  const filter = idx < 3 ? filters : altFilters;\n  \n  return `https://www.linkedin.com/jobs/search?keywords=${encodedKw}&location=${loc}&f_TPR=${timeFilter}&position=1&pageNum=0`;\n});\n\nreturn [{\n  json: {\n    count: 100,\n    scrapeCompany: true,\n    urls: urls\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1600,
+        448
+      ],
+      "id": "58a1cf43-a744-47ab-952b-d6b882cec334",
+      "name": "LinkedinSearchLink"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "https://drive.google.com/file/d/1HzpmgVtDhtsfG3v72nv8VZS25MpqjA-J/view",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2192,
+        288
+      ],
+      "id": "3d41ab7d-0b3b-4757-a73b-4ca38c2e420f",
+      "name": "RetrieveCV1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "lw9YEeFAt6PW5QId",
+          "name": "Google Drive account"
+        }
+      }
     }
   ],
   "pinData": {
@@ -2629,18 +2694,7 @@
       "main": [
         [
           {
-            "node": "RetrieveCV",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "RetrieveCV": {
-      "main": [
-        [
-          {
-            "node": "Extract from File",
+            "node": "RetrieveCV1",
             "type": "main",
             "index": 0
           }
@@ -2673,7 +2727,7 @@
       "main": [
         [
           {
-            "node": "Linkedin",
+            "node": "LinkedinSearchLink",
             "type": "main",
             "index": 0
           }
@@ -2715,28 +2769,6 @@
           {
             "node": "Score the job and extract",
             "type": "ai_outputParser",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Structured Output Parser",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Chat Model1": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Score the job and extract",
-            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -2795,18 +2827,51 @@
       "main": [
         [
           {
-            "node": "Build Email HTML",
+            "node": "Create a database page",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Build Email HTML": {
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Score the job and extract",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LinkedinSearchLink": {
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "Linkedin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RetrieveCV1": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
             "type": "main",
             "index": 0
           }
@@ -2818,11 +2883,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "ba45c8c8-f53e-4f0c-aec1-b69c381ace42",
+  "versionId": "efafc855-6958-427d-b6cd-860265390c78",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "31bc6f8abfb555d0c69c29cee0ff3dbf5cc12cef3572d2bfc80270a06e3df956"
+    "instanceId": "51a08df3ff7f4ca2e2020dea82578ac5e5e62c8b8585552cc2b200dbebc8319b"
   },
-  "id": "b1A8S2HwTPjaJOWK",
+  "id": "ctnD5qiGVqCMO4WP",
   "tags": []
 }
