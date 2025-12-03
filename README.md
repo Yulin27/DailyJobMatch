@@ -229,29 +229,6 @@ The Status field allows you to manually track your application progress for each
 
 ---
 
-## Roadmap
-
-Future enhancements:
-
-- Additional job board integrations (JobIndex, StepStone, Indeed)
-- Auto-apply system with AI-generated cover letters
-- Multi-country job search support
-- Weekly analytics dashboard for job search metrics
-- AI-based CV improvement suggestions based on job matches
-- Email notifications for high-scoring jobs
-
-Contributions welcome! Open an issue or submit a pull request.
-
----
-
-## Contact
-
-**Author:** Chunxu Han
-**Email:** s220311@dtu.dk
-**LinkedIn:** [linkedin.com/in/chunxu-han](https://www.linkedin.com/in/chunxu-han)
-
----
-
 ## License
 
 See [LICENSE](LICENSE) file for details.
