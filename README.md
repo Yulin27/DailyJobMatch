@@ -94,15 +94,8 @@ Provides the LLM for job evaluation. Get your API key from [console.groq.com](ht
 Stores matched jobs in a database for tracking. Follow the [n8n Notion credentials guide](https://docs.n8n.io/integrations/builtin/credentials/notion/).
 
 1. Create a Notion account at [notion.so](https://www.notion.so)
-2. Create a new database called "Job Applications" with the following properties:
-   - **Job Title** (Title)
-   - **Company** (Text)
-   - **Location** (Text)
-   - **Application Link** (URL)
-   - **Keywords** (Multi-select)
-   - **Match score** (Number)
-   - **Posting date** (Date)
-   - **Status** (Select) - optional field for manual tracking
+2. Use Notion template [Job Applications](https://marsh-mandible-880.notion.site/2bda309bdf018002a667db6ce6a486e4?v=2bda309bdf0180e48295000cd38b793c&source=copy_link)
+
 3. Connect Notion to n8n using the API integration
 
 ### 3. Import the Workflow
