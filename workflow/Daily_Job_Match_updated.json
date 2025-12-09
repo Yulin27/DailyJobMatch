@@ -14,10 +14,10 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -2016,
-        256
+        -2848,
+        416
       ],
-      "id": "24b430b9-9dfe-4577-aec1-6aa842ef0b81",
+      "id": "a8f3d026-bc1d-49a9-8701-6f0cf4d380dd",
       "name": "Schedule Trigger"
     },
     {
@@ -28,10 +28,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        -1376,
-        256
+        -2208,
+        416
       ],
-      "id": "f3143cc6-94c8-4c2a-ab2e-b76fc58fb3b6",
+      "id": "bf825d64-4f33-4473-b815-95b4d57758d8",
       "name": "Extract from File"
     },
     {
@@ -63,28 +63,27 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -832,
-        256
+        -1664,
+        416
       ],
-      "id": "64009017-1292-4619-9a78-b5a425e3f769",
+      "id": "625087e7-e6a5-4bbe-972b-637324f652cc",
       "name": "Linkedin"
     },
     {
       "parameters": {
         "promptType": "define",
         "text": "=You are a professional AI assistant that evaluates how well a candidate's CV fits a specific job.\n\n## GOAL\nCompare the candidate's CV and the job description, evaluate their fit across defined categories, and return **STRICT JSON only**.\n\n---\n\n### INPUTS\n- Candidate CV:\n{{ $json.cv_text }}\n- Job description:\n{{ $json.job_text }}\n\n---\n\n### CANDIDATE PREFERENCES\n- Preferred languages: {{ $('Config').item.json.preferLanguages }}\n- Seniority preference: {{ $('Config').item.json.seniorityPreference }}\n- Target domain: {{$('Config').item.json.keywords }}\n---\n\n### TASKS\n1. **Understand the role**  \n   - Write a neutral 2–3-sentence summary of what the job is about.  \n   - Extract 3–5 concise keywords that capture its main technical and domain focus.\n\n2. **Assess fit**  \n   - Produce 2–3 short bullet points showing how the candidate's background or experience matches the role.  \n   - Write a short connector (1–2 sentences) that links the candidate's profile to the job's mission or company focus.\n\n3. **Score fit across categories**\n\n| Category | Range | Guidance |\n|-----------|-------|-----------|\n| background_match | 0–10 | Evaluate domain fit: 10 = job's domain/industry perfectly matches candidate's CV expertise and experience; 6–9 = related or transferable domain; 0 = completely unrelated field |\n| skills_overlap | 0–30 | Compare technical skills, tools, methodologies, and soft skills appearing in both CV and job description. Count matches and assess depth of overlap |\n| experience_relevance | 0–30 | Check if candidate's project or work experience aligns with the job's listed responsibilities and requirements. Consider relevance and depth of experience |\n| seniority | 0–10 | Score based on preference \"{{ $('Config').item.json.seniorityPreference }}\": 10 = matches preference perfectly; 5 = neutral/mid-level; 0 = opposite of preference (e.g., if preference is junior, senior roles score 0) |\n| language_requirement | 0–10 | Score based on preferred languages {{ $('Config').item.json.preferLanguages }}: 10 = job requires/accepts preferred languages or is language-flexible; 5 = partial match; 0 = requires languages not in preferred list |\n| company_score | 0–10 | Evaluate company alignment: 10 = company's industry, size, and profile strongly match candidate's background and career goals evident in CV; 5 = medium fit; 0 = company type mismatches candidate profile |\n\nThen compute  \n`overall = background_match + skills_overlap + experience_relevance + seniority + language_requirement + company_score`\n\n---\n\n### RULES\n- Use only information found in the CV and job text.  \n- Return one **valid JSON object** exactly matching the schema below.  \n- No explanations or natural-language text outside the JSON.  \n- `score.overall` must equal the sum of sub-scores.\n\n---\n\n### OUTPUT SCHEMA\n{\n  \"score\": {\n    \"overall\": (0–100),\n    \"background_match\": (0–10),\n    \"skills_overlap\": (0–30),\n    \"experience_relevance\": (0–30),\n    \"seniority\": (0–10),\n    \"language_requirement\": (0–10),\n    \"company_score\": (0–10)\n  },\n  \"summary\": \"2–3 sentence neutral summary of the role\",\n  \"keywords\": [\"keyword1\",\"keyword2\",\"keyword3\"],\n  \"fit_bullets\": [\n    \"bullet1\",\n    \"bullet2\"\n  ],\n  \"connector\": \"1–2 sentences linking the candidate's experience to this role\"\n}\n\n---\n\n### OUTPUT EXAMPLE\n{\n  \"score\": {\n    \"overall\": 82,\n    \"background_match\": 8,\n    \"skills_overlap\": 24,\n    \"experience_relevance\": 25,\n    \"seniority\": 9,\n    \"language_requirement\": 8,\n    \"company_score\": 8\n  },\n  \"summary\": \"This is an entry-level data-science position within a biotech analytics team focusing on experimental design and data visualization.\",\n  \"keywords\": [\"Python\",\"data analysis\",\"bioinformatics\",\"pipelines\"],\n  \"fit_bullets\": [\n    \"Developed and maintained R/Python pipelines for omics data at DTU HealthTech.\",\n    \"Experience in transcriptomics and proteomics aligns with the company's analytical workflows.\"\n  ],\n  \"connector\": \"The candidate's background in multi-omics data analysis and software development directly supports the analytical needs of this biotech data-science role.\"\n}",
-        "hasOutputParser": true,
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3,
       "position": [
-        320,
-        64
+        -512,
+        224
       ],
-      "id": "5d2a27c7-d5fe-46a5-80cf-7a46c756c8ef",
+      "id": "577755e3-daaa-4e0b-a626-ee636e252a20",
       "name": "Score the job and extract",
-      "retryOnFail": true
+      "retryOnFail": false
     },
     {
       "parameters": {
@@ -111,7 +110,7 @@
             {
               "id": "7c3a4b5d-6e7f-8g9h-0i1j-2k3l4m5n6o7p",
               "name": "keywords",
-              "value": "[\"NLP Engineer\", \"AI Engineer\", \"Machine Learning Engineer\"]",
+              "value": "[\"data scientist\", \"data analyst\"]",
               "type": "string"
             },
             {
@@ -129,7 +128,7 @@
             {
               "id": "0f6d7e8g-9h0i-1j2k-3l4m-5n6o7p8q9r0s",
               "name": "seniorityPreference",
-              "value": "entry-level or junior",
+              "value": "junior",
               "type": "string"
             }
           ]
@@ -139,10 +138,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1840,
-        256
+        -2672,
+        416
       ],
-      "id": "0cdada51-c822-4ecb-98ef-b782e1e7288a",
+      "id": "9ebb3cc0-a6ef-45a6-910a-08e9cd418486",
       "name": "Config"
     },
     {
@@ -153,10 +152,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -608,
-        256
+        -1440,
+        416
       ],
-      "id": "6436dce1-65ff-4b3b-9f61-0ee55f7801a0",
+      "id": "aade9446-2fc2-4ab6-a119-74d580356951",
       "name": "NormalizeData"
     },
     {
@@ -166,10 +165,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -384,
-        256
+        -1216,
+        416
       ],
-      "id": "cb7126a1-ad3d-4a95-9462-d1086952f141",
+      "id": "79ce6df8-f8d6-4297-9865-0bef7cdf85d7",
       "name": "Filter and deduplicate"
     },
     {
@@ -189,26 +188,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1152,
-        256
+        -1984,
+        416
       ],
-      "id": "d9e1828b-f436-454a-ab34-07ff85758cc1",
+      "id": "21fc4418-d126-4773-8478-0975f9e2d5ce",
       "name": "MapResume"
-    },
-    {
-      "parameters": {
-        "schemaType": "manual",
-        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"score\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"overall\": { \"type\": \"number\" },\n        \"background_match\": { \"type\": \"number\" },\n        \"skills_overlap\": { \"type\": \"number\" },\n        \"experience_relevance\": { \"type\": \"number\" },\n        \"seniority\": { \"type\": \"number\" },\n        \"language_requirement\": { \"type\": \"number\" },\n        \"company_score\": { \"type\": \"number\" }\n      },\n      \"required\": [\n        \"overall\",\n        \"background_match\",\n        \"skills_overlap\",\n        \"experience_relevance\",\n        \"seniority\",\n        \"language_requirement\",\n        \"company_score\"\n      ]\n    },\n    \"summary\": { \"type\": \"string\" },\n    \"keywords\": {\n      \"type\": \"array\",\n      \"items\": { \"type\": \"string\" }\n    },\n    \"fit_bullets\": {\n      \"type\": \"array\",\n      \"items\": { \"type\": \"string\" }\n    },\n    \"connector\": { \"type\": \"string\" }\n  },\n  \"required\": [\"score\", \"summary\", \"keywords\", \"fit_bullets\", \"connector\"]\n}",
-        "autoFix": true
-      },
-      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-      "typeVersion": 1.3,
-      "position": [
-        416,
-        304
-      ],
-      "id": "9f65eb7b-0f15-408e-92dc-845740d5afc7",
-      "name": "Structured Output Parser"
     },
     {
       "parameters": {
@@ -219,11 +203,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -2032,
-        80
+        -2864,
+        240
       ],
       "typeVersion": 1,
-      "id": "1cdf361d-43a9-40bc-9418-68059af8d100",
+      "id": "298ff337-216a-4d5b-8d33-fdb13f830ca0",
       "name": "Sticky Note2"
     },
     {
@@ -234,11 +218,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1888,
-        80
+        -2720,
+        240
       ],
       "typeVersion": 1,
-      "id": "1d4dc2e9-acad-47ca-b1c8-73f6ea2d5960",
+      "id": "19714570-b816-4ce9-a8d8-6368ad821a85",
       "name": "Sticky Note3"
     },
     {
@@ -250,11 +234,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1648,
-        80
+        -2480,
+        240
       ],
       "typeVersion": 1,
-      "id": "51998ccc-123f-48d8-8987-51713be29de1",
+      "id": "b80bcf61-b3b3-48f1-9190-0be981e29aa2",
       "name": "Sticky Note4"
     },
     {
@@ -266,11 +250,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -992,
-        80
+        -1824,
+        240
       ],
       "typeVersion": 1,
-      "id": "f856903f-07f3-420d-a68c-d165a44be8c3",
+      "id": "06ca3523-b789-4269-86cb-f4346c26dd92",
       "name": "Sticky Note5"
     },
     {
@@ -281,10 +265,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -160,
-        256
+        -992,
+        416
       ],
-      "id": "836196ab-4582-4a20-9ea2-f14eae84f50e",
+      "id": "3150b82f-9bc3-444e-af66-02ea788ed125",
       "name": "Prepare AI Input"
     },
     {
@@ -296,27 +280,12 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        0,
-        0
+        -832,
+        160
       ],
       "typeVersion": 1,
-      "id": "458c06be-545b-4baf-964d-10c1ebc36be8",
+      "id": "d58df203-68e6-4f87-8f0f-9f76dba0c0a3",
       "name": "Sticky Note1"
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "combineBy": "combineByPosition",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        1008,
-        256
-      ],
-      "id": "d3ab6a5e-0107-4dcd-bcd3-921aefb713c4",
-      "name": "Merge Scores + Meta"
     },
     {
       "parameters": {
@@ -327,25 +296,25 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        688,
-        80
+        -144,
+        240
       ],
       "typeVersion": 1,
-      "id": "22ceb56a-17a0-4d36-9453-376e8b634e73",
+      "id": "88a5b69b-4cbe-403a-ab0e-7ba209e81e37",
       "name": "Sticky Note6"
     },
     {
       "parameters": {
         "mode": "runOnceForEachItem",
-        "jsCode": "// Function Item version – returns ONE object\n\nlet raw;\n\nif (typeof $json.output === 'string') {\n  raw = $json.output;\n} else if ($json.choices?.[0]?.message?.content) {\n  raw = $json.choices[0].message.content;\n} else {\n  raw = JSON.stringify($json);\n}\n\nraw = raw.trim();\nraw = raw.replace(/^```json/i, '').replace(/```$/, '').trim();\n\nlet data;\ntry {\n  data = JSON.parse(raw);\n} catch (e) {\n  const m = raw.match(/\\{[\\s\\S]*\\}/);\n  if (m) {\n    try { data = JSON.parse(m[0]); }\n    catch (e2) { data = { parse_error: e2.message, raw }; }\n  } else {\n    data = { parse_error: e.message, raw };\n  }\n}\n\n// return a single object (Function Item requires an object)\nreturn data;"
+        "jsCode": "// Function Item version – returns ONE object\n\nlet raw;\n\nif (typeof $json.output === 'string') {\n  raw = $json.output;\n} else if ($json.choices?.[0]?.message?.content) {\n  raw = $json.choices[0].message.content;\n} else {\n  raw = JSON.stringify($json);\n}\n\nraw = raw.trim();\nraw = raw.replace(/^```json/i, '').replace(/```$/, '').trim();\n\nlet data;\ntry {\n  data = JSON.parse(raw);\n} catch (e) {\n  const m = raw.match(/\\{[\\s\\S]*\\}/);\n  if (m) {\n    try { data = JSON.parse(m[0]); }\n    catch (e2) { data = { parse_error: e2.message, raw }; }\n  } else {\n    data = { parse_error: e.message, raw };\n  }\n}\n\n// Validate and fix score structure\nif (data && data.score) {\n  // Ensure all required score fields exist\n  const score = data.score;\n  score.background_match = score.background_match || 0;\n  score.skills_overlap = score.skills_overlap || 0;\n  score.experience_relevance = score.experience_relevance || 0;\n  score.seniority = score.seniority || 0;\n  score.language_requirement = score.language_requirement || 0;\n  score.company_score = score.company_score || 0;\n  \n  // Calculate overall if missing\n  if (!score.overall) {\n    score.overall = \n      score.background_match + \n      score.skills_overlap + \n      score.experience_relevance + \n      score.seniority + \n      score.language_requirement + \n      score.company_score;\n  }\n}\n\n// Ensure other required fields have defaults\nif (data) {\n  data.summary = data.summary || 'No summary available';\n  data.keywords = data.keywords || [];\n  data.fit_bullets = data.fit_bullets || [];\n  data.connector = data.connector || 'No connector available';\n}\n\n// FIXED: Retrieve job_meta by referencing the Prepare AI Input node directly\nlet job_meta = {};\n\ntry {\n  // Access the Prepare AI Input node directly using pairing\n  job_meta = $('Prepare AI Input').item.json.job_meta || {};\n} catch (e) {\n  // Fallback methods if direct reference fails\n  if ($json.job_meta) {\n    job_meta = $json.job_meta;\n  } else if ($input.item?.json?.job_meta) {\n    job_meta = $input.item.json.job_meta;\n  } else if ($item(0)?.json?.job_meta) {\n    job_meta = $item(0).json.job_meta;\n  }\n}\n\n// Combine parsed output with job metadata\nreturn {\n  output: data,\n  job_meta: job_meta\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        736,
-        176
+        -96,
+        336
       ],
-      "id": "6ac54e56-eb83-4406-8da7-7c7f39b7ced6",
+      "id": "070ac392-f02a-4944-bc9b-33ca0e7496e1",
       "name": "Parse LLM JSON"
     },
     {
@@ -357,11 +326,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1168,
-        80
+        352,
+        240
       ],
       "typeVersion": 1,
-      "id": "636b058e-9025-4d62-bbe4-fcbf83087be8",
+      "id": "bfd33c4d-63d8-4b3e-94d0-951d6302a139",
       "name": "Sticky Note7"
     },
     {
@@ -381,10 +350,10 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        1232,
-        256
+        416,
+        416
       ],
-      "id": "633d8392-9605-44d1-84fd-cd7e46908831",
+      "id": "4f0d0b74-307b-4c16-86fc-fbc0fb4ce9c8",
       "name": "Rank by Overall Score"
     },
     {
@@ -396,46 +365,26 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1616,
-        80
+        800,
+        240
       ],
       "typeVersion": 1,
-      "id": "cc93a771-9432-40d8-b97d-87f1ae24b292",
+      "id": "84855deb-ed34-4e35-b454-72bbd4ee3be1",
       "name": "Sticky Note8"
     },
     {
       "parameters": {
-        "model": "llama-3.3-70b-versatile",
+        "model": "llama-3.1-8b-instant",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
       "typeVersion": 1,
       "position": [
-        288,
-        304
+        -544,
+        464
       ],
-      "id": "36ff6534-80b1-4e23-bed5-7952816ec492",
+      "id": "a3aa5d84-7257-4827-82f8-d08553d6d471",
       "name": "Groq Chat Model",
-      "credentials": {
-        "groqApi": {
-          "id": "X4B2LLN4sicsS3OB",
-          "name": "Groq account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "model": "llama-3.3-70b-versatile",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
-      "typeVersion": 1,
-      "position": [
-        496,
-        512
-      ],
-      "id": "08512cf6-848d-4b33-9ebf-f6870577c55a",
-      "name": "Groq Chat Model1",
       "credentials": {
         "groqApi": {
           "id": "X4B2LLN4sicsS3OB",
@@ -495,10 +444,10 @@
       "type": "n8n-nodes-base.notion",
       "typeVersion": 2.2,
       "position": [
-        1664,
-        256
+        848,
+        416
       ],
-      "id": "3992c3a5-f1d3-4327-aa12-aa0d63e4cabf",
+      "id": "fc7b1297-006b-4c4b-817d-270cf18b43ad",
       "name": "Create a database page",
       "credentials": {
         "notionApi": {
@@ -514,10 +463,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -976,
-        256
+        -1808,
+        416
       ],
-      "id": "fad8d949-4173-40ce-9475-7c9229adfa6f",
+      "id": "96c2e063-ff65-429c-921f-9f22bc0ae2fc",
       "name": "LinkedinSearchLink"
     },
     {
@@ -533,10 +482,10 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -1600,
-        256
+        -2432,
+        416
       ],
-      "id": "fd619f38-bd26-4b44-b8ca-57628b446e7d",
+      "id": "8bf4e518-0c7c-4294-b898-37af133304d2",
       "name": "RetrieveCV1",
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -552,11 +501,41 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1456,
-        256
+        640,
+        416
       ],
-      "id": "a0cb741f-173a-4c9b-856c-086cc546586f",
+      "id": "02b2a7fc-f8a0-47b2-83df-50d92ac9f0b1",
       "name": "Top Slice"
+    },
+    {
+      "parameters": {
+        "content": "**(Optional) Batch Running:**\n- Runs the AI agent in controlled batches \ninstead of sending all items at once.\n- Each batch is processed sequentially and loops back until all items are processed.\n- When complete, all processed items continue to ranking and selection.",
+        "height": 400,
+        "width": 672,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -832,
+        -304
+      ],
+      "typeVersion": 1,
+      "id": "1f61aec8-d335-4c12-8e0a-b47b9c214f85",
+      "name": "Sticky Note17"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        96,
+        336
+      ],
+      "id": "013c7fd0-c176-4558-8fb0-74a073ffb261",
+      "name": "Rate Limit Delay2",
+      "webhookId": "00000000-0000-0000-0000-000000000000"
     },
     {
       "parameters": {
@@ -566,39 +545,12 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        112,
-        -208
+        -720,
+        -64
       ],
-      "id": "2de7c4b3-286c-4cea-abc9-37d3bffe2f9c",
-      "name": "Loop Over Items1",
+      "id": "8b7aaee9-11c3-4466-9f77-a57118445d63",
+      "name": "Loop Over Items2",
       "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "name": "Replace Me1",
-      "typeVersion": 1,
-      "position": [
-        480,
-        -416
-      ],
-      "id": "df054188-64a4-4b87-b650-7b6e8a49311e"
-    },
-    {
-      "parameters": {
-        "content": "**(Optional) Batch Running:**\n- Runs the AI agent in controlled batches \ninstead of sending all items at once.\n-  Reassembles and outputs all processed \nbatches into a single, continuous dataset.",
-        "height": 400,
-        "width": 672,
-        "color": 7
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "position": [
-        0,
-        -448
-      ],
-      "typeVersion": 1,
-      "id": "9f71366c-dbff-464a-b554-662d9ed045b1",
-      "name": "Sticky Note17"
     }
   ],
   "pinData": {},
@@ -691,38 +643,11 @@
         ]
       ]
     },
-    "Structured Output Parser": {
-      "ai_outputParser": [
-        [
-          {
-            "node": "Score the job and extract",
-            "type": "ai_outputParser",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Prepare AI Input": {
       "main": [
         [
           {
-            "node": "Merge Scores + Meta",
-            "type": "main",
-            "index": 1
-          },
-          {
-            "node": "Loop Over Items1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Merge Scores + Meta": {
-      "main": [
-        [
-          {
-            "node": "Rank by Overall Score",
+            "node": "Loop Over Items2",
             "type": "main",
             "index": 0
           }
@@ -733,7 +658,7 @@
       "main": [
         [
           {
-            "node": "Merge Scores + Meta",
+            "node": "Rate Limit Delay2",
             "type": "main",
             "index": 0
           }
@@ -756,17 +681,6 @@
         [
           {
             "node": "Score the job and extract",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Groq Chat Model1": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Structured Output Parser",
             "type": "ai_languageModel",
             "index": 0
           }
@@ -806,29 +720,29 @@
         ]
       ]
     },
-    "Loop Over Items1": {
+    "Rate Limit Delay2": {
       "main": [
         [
           {
-            "node": "Score the job and extract",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Replace Me1",
+            "node": "Loop Over Items2",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Replace Me1": {
+    "Loop Over Items2": {
       "main": [
         [
           {
-            "node": "Loop Over Items1",
+            "node": "Rank by Overall Score",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Score the job and extract",
             "type": "main",
             "index": 0
           }
@@ -840,7 +754,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "5646e02d-7195-4761-8dbf-c2aec34c9ca3",
+  "versionId": "772f64ca-ddfc-4d1d-a119-d7edbd4f4824",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "51a08df3ff7f4ca2e2020dea82578ac5e5e62c8b8585552cc2b200dbebc8319b"
